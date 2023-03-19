@@ -164,5 +164,41 @@ Map<Person, String> people = new TreeMap<>(new Comparator<Person>() {
     }
 });
 
+for (Map.Entry<Person, String> entry : people.entrySet()) {
+    System.out.println(entry.getKey().getName() + " " + entry.getKey().getAge() + " " + entry.getValue());
+}
 
 ------------------------
+
+Yes, there are other uses of () -> lambda expressions in Java besides defining Supplier functions. Here are a few examples:
+
+Runnable interface: 
+
+() -> lambda expressions can be used to implement the Runnable interface, 
+which represents a task that can be executed asynchronously. Here is an example:
+
+Runnable task = () -> {
+    // code to be executed asynchronously
+};
+Function interface: 
+
+() -> lambda expressions can be used to implement the Function interface, 
+which represents a function that takes no arguments and returns a value. Here is an example:
+
+Function<Void, String> function = (Void) -> {
+    // code to compute the result
+    return "result";
+};
+
+Callable interface: 
+() -> lambda expressions can be used to implement the Callable interface, which represents a task that returns a result 
+and may throw an exception. Here is an example:
+
+Callable<String> task = () -> {
+    // code to compute the result
+    return "result";
+};
+
+In general, 
+() -> lambda expressions can be used anywhere a functional interface with no arguments is expected. 
+This includes many standard Java classes and libraries, as well as custom interfaces that you define in your own code.
