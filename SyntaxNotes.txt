@@ -1,0 +1,24 @@
+
+custom heap using Generic class
+
+class MaxHeap<T extends Comparable<T>>{
+        PriorityQueue<T> pq;
+        MaxHeap(){
+            pq = new PriorityQueue<T>(Comparator.reverseOrder());
+        }
+        void push(T item){
+            pq.add(item);
+        }
+        T remove(){
+            return pq.remove();
+        }
+        T peek(){
+            return pq.peek();
+        }
+        int size(){
+            return pq.size();
+        }
+    }
+
+-----------------------------
+
