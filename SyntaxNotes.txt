@@ -21,4 +21,36 @@ class MaxHeap<T extends Comparable<T>>{
     }
 
 -----------------------------
+List of different data types possible, but u need to be extra careful while reading the elements from the list
+
+List<Object> a = new ArrayList<>();
+        a.add("hello");
+        a.add(1);
+        System.out.println(String.join(",",a.stream().map(
+            x -> {
+            if(x instanceof Integer) {return ""+(Integer)x;}
+            else {return (String)x;
+            }
+            
+        }).collect(Collectors.toList())
+        ));
+----------------------------
+
+Way 1 - 
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println(a);
+    }
+}
+
+MyRunnable task = new MyRunnable();
+Thread t = new Thread(task);
+
+Way 2 - (Shortcut using lambda)
+
+Thread t = new Thread(() -> {
+    System.out.println(a);
+});
+
+---------------------------------
 
