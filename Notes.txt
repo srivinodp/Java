@@ -43,3 +43,126 @@ By default, it throws an IllegalMonitorStateException.
 wait(long timeout, int nanos): 
 This method causes the current thread to wait until another thread invokes the notify() or notifyAll() method on the same object, 
 or until the specified timeout has elapsed. It also allows for a more precise timeout value in nanoseconds. By default, it throws an IllegalMonitorStateException.
+
+------------------------------
+
+Comparator and Comparable
+
+Both Comparable and Comparator are interfaces in Java that are used to define a custom order for objects.
+
+Comparable
+
+The Comparable interface is used to define the natural ordering of objects. 
+If a class implements the Comparable interface, it means that its objects 
+have a natural order that can be compared with other objects of the same class.
+
+The Comparable interface has a single method:
+
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+The compareTo() method compares the current object with the specified object of the same type and returns a negative integer,
+zero, or a positive integer depending on whether the current object is less than, equal to, or greater than the specified object.
+
+For example, consider a Person class that has a name and an age field:
+
+java
+Copy code
+public class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public int compareTo(Person other) {
+        return this.age - other.age;
+    }
+}
+In this example, the Person class implements the Comparable<Person> interface and overrides the compareTo() method to compare two Person objects based on their age. The compareTo() method subtracts the age of the other object from the age of the current object and returns the result.
+
+With this implementation, we can sort a list of Person objects based on their age using the Collections.sort() method:
+
+List<Person> people = new ArrayList<>();
+people.add(new Person("Alice", 25));
+people.add(new Person("Bob", 20));
+people.add(new Person("Charlie", 30));
+
+Collections.sort(people); // sort by age
+
+for (Person person : people) {
+    System.out.println(person.getName() + " " + person.getAge());
+}
+This will output:
+
+Bob 20
+Alice 25
+Charlie 30
+
+
+Comparator
+
+The Comparator interface is used to define a custom ordering for objects that do not have a natural ordering. 
+If a class does not implement the Comparable interface, we can still sort its objects by providing a Comparator object 
+that defines the ordering.
+
+The Comparator interface has a single method:
+
+java
+Copy code
+public interface Comparator<T> {
+    public int compare(T o1, T o2);
+}
+The compare() method compares two objects of the same type and returns a negative integer, zero, or a positive integer depending on whether the first object is less than, equal to, or greater than the second object.
+
+For example, consider a Person class that has a name and an age field:
+
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+In this example, the Person class does not implement the Comparable interface. 
+To sort a list of Person objects based on their age, we can provide a Comparator<Person> object that defines the ordering:
+
+List<Person> people = new ArrayList<>();
+people.add(new Person("Alice", 25));
+people.add(new Person("Bob", 20));
+people.add(new Person("Charlie", 30));
+
+Comparator<Person> byAge = new Comparator<Person>() {
+    @Override
+    public int compare(Person o1, Person o2){
+        return o1.getAge() - o2.getAge();
+    }
+};
+
+Collections.sort(people, byAge); // sort by age
+
+Eg2:
+Comparator For TreeMap
+
+Map<Person, String> people = new TreeMap<>(new Comparator<Person>() {
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o1.getAge() - o2.getAge();
+    }
+});
+
+
+------------------------
